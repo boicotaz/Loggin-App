@@ -1,7 +1,7 @@
 html
     head
         meta(charset='utf-8')
-        title Oauth project
+        title Login
         link(rel='stylesheet', href='/public/style.css')
     body
         nav
@@ -12,16 +12,11 @@ html
                     a(href='/login') Login
                 li 
                     a(href='/') Homepage
-                li
-                     a(href='/register') Register
-
         header 
-            h1 Home Page
+            h1 Login using...
         main
-            p Best OAuth app 
-        if alreadyExists 
-            hr
-            p User already Exists
-        if registerSuccess
-            hr 
-            p User created Succesfully
+            a(class='google-btn',href='/login/google') Google+
+            br
+            br
+            br
+            a(class = 'google-btn' , href='/login/local') Local Login
