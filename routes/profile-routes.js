@@ -4,10 +4,6 @@ const LocalStrategy = require('passport-local').Strategy;
 // const localauth = require('../config/passport-setup');
 
 
-
-
-
-
 var authCheck = (req,res,next) => {
    console.log('in auth check');
    console.log(req.isAuthenticated() + 'failed?')
@@ -26,4 +22,4 @@ router.get('/' , authCheck, (req,res) => {
     
 
 
-module.exports = router
+module.exports = {router,authCheck}

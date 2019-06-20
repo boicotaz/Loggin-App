@@ -5,11 +5,13 @@ require('dotenv').config();
 const server = require('http').createServer(app);
 const registerRoutes = require('./routes/register-routes');
 const loginRoutes = require('./routes/login-routes');
-const profileRoutes = require('./routes/profile-routes')
+const profileRoutes = require('./routes/profile-routes').router;
+const authCheck = require('./routes/profile-routes').authCheck;
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const sessionStore= new session.MemoryStore();
+const logoutRoutes =  require('./routes/login-routes');
 
 mongodb.connect(process.env.MONGO_URI ,{useNewUrlParser: true}, (err,db) => {
     // console.log('Mongo db CONNECTED...');
@@ -37,10 +39,15 @@ mongodb.connect(process.env.MONGO_URI ,{useNewUrlParser: true}, (err,db) => {
         res.render('home');
     });
 
+    app.get('/logged-in' ,authCheck, (req,res) => {
+        res.render( 'home-logged', {username: req.user.username})
+    });
+    
     //Set Routes
     app.use('/register' , registerRoutes);
     app.use('/login', loginRoutes);
     app.use('/login/auth', profileRoutes);
+    app.use('/logout' , logoutRoutes);
     
     server.listen(process.env.PORT || 4000,'127.0.0.1', () => {
         console.log( `app is now listening to port ${process.env.PORT || 4000}`);
