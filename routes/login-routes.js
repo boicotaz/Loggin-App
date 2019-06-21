@@ -14,14 +14,14 @@ router.get('/local' ,(req,res) => {
 
 
 passport.serializeUser((user,done) => {
-    console.log('serialize');
+    console.log('serialize routine');
     done(null,user.username);
 });
     
 
 
 passport.deserializeUser((id,done) => {
-    console.log('deserialize ' + `${id} is id or user`);
+    console.log('deserialize routine with key:  ' + `${id}`);
 
     mongodb.connect(process.env.MONGO_URI ,{useNewUrlParser: true}, (err,db) => {
         let testDB = db.db('test'), users = testDB.collection('users');

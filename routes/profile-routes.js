@@ -5,8 +5,8 @@ const LocalStrategy = require('passport-local').Strategy;
 
 
 var authCheck = (req,res,next) => {
-   console.log('in auth check');
-   console.log(req.isAuthenticated() + 'failed?')
+   console.log('is user validated??');
+   console.log('the answer is : ' + req.isAuthenticated() )
     if (req.isAuthenticated()) {
        return next();
     }
@@ -18,8 +18,6 @@ var authCheck = (req,res,next) => {
 router.get('/' , authCheck, (req,res) => {
     res.render( 'profile', {username: req.user.username})
 })
-
-    
 
 
 module.exports = {router,authCheck}

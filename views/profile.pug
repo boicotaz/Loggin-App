@@ -5,28 +5,25 @@ html
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         
-        //- script(src="/socket.io/socket.io.js")
-        
-        //- script(src='/socket.io/socket.io.js')
-        //- <audio id="xyz" src="whatever_you_want.mp3" preload="auto"></audio>
+
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js')
         audio#xyz(src ='/public/sound.mp3' , preload = 'auto')
         link(rel='stylesheet', href='/public/style.css')
         body
             nav
                 ul
                     li 
-                        a(href='/logout') Logout
+                        a(href='/logout') Logout    
                     li 
                         a(href='/logged-in') Homepage
             header Welcome to your profile,
                 strong#username #{username}
-            div#mario-chat
+            div#Le-chat
+                div#typing
                 div#chat-window
-                    div#output
+                    div#output 
                 input#message(type='text' , placeholder="Message")
                 button#send Send
-            //- script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js')
-            //- script(src='/socket.io/socket.io.js')
-            //- script(src="/public/chat.js")
-            script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+            script(src='/public/chat.js')
+            
             

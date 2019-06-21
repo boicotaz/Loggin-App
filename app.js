@@ -12,6 +12,8 @@ const passport = require('passport');
 const session = require('express-session');
 const sessionStore= new session.MemoryStore();
 const logoutRoutes =  require('./routes/login-routes');
+const socket = require('./socket/socket-setup');
+
 
 mongodb.connect(process.env.MONGO_URI ,{useNewUrlParser: true}, (err,db) => {
     // console.log('Mongo db CONNECTED...');
@@ -34,7 +36,7 @@ mongodb.connect(process.env.MONGO_URI ,{useNewUrlParser: true}, (err,db) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    // Create home Route
+    // Create home Routes
     app.get('/',(req,res) => {
         res.render('home');
     });
@@ -49,7 +51,10 @@ mongodb.connect(process.env.MONGO_URI ,{useNewUrlParser: true}, (err,db) => {
     app.use('/login/auth', profileRoutes);
     app.use('/logout' , logoutRoutes);
     
-    server.listen(process.env.PORT || 4000,'127.0.0.1', () => {
+    server.listen(process.env.PORT || 4000, () => {
         console.log( `app is now listening to port ${process.env.PORT || 4000}`);
     })
+
+    // Socket Handler
+    socket(server);
 })
